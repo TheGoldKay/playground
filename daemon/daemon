@@ -1,0 +1,22 @@
+#!/bin/bash
+
+DAEMON_SCRIPT="./main.py"
+
+# Main script logic
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 start|stop"
+    exit 1
+fi
+
+case "$1" in
+    start)
+        python3 "$DAEMON_SCRIPT" start
+        ;;
+    stop)
+        python3 "$DAEMON_SCRIPT" stop
+        ;;
+    *)
+        echo "Invalid option: $1. Use 'start' or 'stop'."
+        exit 1
+        ;;
+esac
