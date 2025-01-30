@@ -1,3 +1,8 @@
+Logout:
+```bash
+exit # or logout
+```
+
 Display the whole file:
 ```bash
 cat readme 
@@ -10,7 +15,7 @@ grep 'password' readme
 
 Return just the password:
 ```bash
-rep -o ': .*' readme | sed 's/: //'
+grep -o ': .*' readme | sed 's/: //'
 ```
 
 
