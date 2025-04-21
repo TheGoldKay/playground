@@ -1,0 +1,17 @@
+<h1 class="title">Ajax to-dos</h1>
+
+<%= form_with model: @new_todo, data: { controller: "form", action: "turbo:submit-end->form#reset" }, class: "form" do |form| %>
+  <%= form.text_field :name, placeholder: "Add a new to-do...", autocomplete: :off, class: "form__input" %>
+<% end %>
+
+<ul class="todo-list todo-list--open-todos">
+  <%= turbo_frame_tag "todos" do %>
+    <%= render @open_todos %>
+  <% end %>
+</ul>
+
+<ul class="todo-list todo-list--completed-todos">
+  <%= turbo_frame_tag "completed_todos" do %>
+    <%= render @completed_todos %>
+  <% end %>
+</ul>

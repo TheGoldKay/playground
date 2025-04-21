@@ -1,0 +1,36 @@
+.todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+.todo-list--completed-todos {
+  .todo-list__todo {
+    color: #666;
+    font-size: 0.9em;
+  }
+  .todo-list__todo-name {
+    text-decoration: line-through;
+  }
+}
+
+.todo-list--open-todos {
+  .todo-list__todo {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 7px;
+    background: #f0f0f0;
+    margin-bottom: 3px;
+    border-radius: 2px;
+
+    &:hover {
+      .todo-list__todo-controls {
+        display: inline;
+      }
+    }
+    .todo-list__todo-controls {
+      display: none;
+      flex-shrink: 0;
+    }
+  }
+}
