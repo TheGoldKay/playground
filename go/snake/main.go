@@ -13,6 +13,35 @@ type Player struct{
 	color color.RGBA
 }
 
+func (p *Player) Move(g Game){
+	// Move the player with arrow keys
+	if ebiten.IsKeyPressed(ebiten.KeyArrowUp) {
+		p.y -= 2
+	}
+	if ebiten.IsKeyPressed(ebiten.KeyArrowDown) {
+		p.y += 2
+	}
+	if ebiten.IsKeyPressed(ebiten.KeyArrowLeft) {
+		p.x -= 2
+	}
+	if ebiten.IsKeyPressed(ebiten.KeyArrowRight) {
+		p.x += 2
+	}	
+	// Ensure the player stays within the window bounds
+	if p.x < 0 {
+		p.x = 0
+	}
+	if p.y < 0 {
+		p.y = 0	
+	}
+	if p.x + p.ln > float32(g.win_w) {
+		p.x = float32(g.win_w) - p.ln
+	}
+	if p.y + p.ln > float32(g.win_h) {
+		p.y = float32(g.win_h) - p.ln	
+	}	
+}
+
 type Game struct{
 	player Player
 	bg_color color.RGBA
@@ -22,6 +51,7 @@ type Game struct{
 
 func (g *Game) Update() error {
 	// Close the game when the Escape key is pressed
+	g.player.Move(*g)
 	if ebiten.IsKeyPressed(ebiten.KeyEscape) {
 		return ebiten.Termination
 	}
@@ -42,7 +72,7 @@ func main() {
 	window_width := 640
 	window_height := 480
 	ebiten.SetWindowSize(window_width, window_height)
-	ebiten.SetWindowTitle("Green Screen Game")
+	ebiten.SetWindowTitle("Snake Game")
 	game := &Game{
 		player: Player{
 			x: float32(window_width / 2),
